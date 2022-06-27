@@ -1,0 +1,341 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    /*background-image: linear-gradient(rgb(120, 0, 190), #1e1e1e);*/
+    background-color: rgb(63, 0, 100);
+    margin: 0;
+}
+
+/* Navbar begin */
+
+a.navbar-links {
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+}
+
+#navbar-div {
+    display: flex;
+    justify-content: space-around;
+    column-gap: 55px;
+    padding: 35px 80px;
+    font-weight: 500;
+}
+
+@media screen and (min-width: 480px) {
+    a.navbar-links {
+        font-size: 26px;
+    }
+    
+    #navbar-div {
+        display: flex;
+        justify-content: flex-end;
+        column-gap: 55px;
+        padding: 35px 80px;
+        font-weight: 500;
+    }
+}
+
+/* Navbar End */
+
+/* Face Begin */
+
+#face {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: space-around;
+    column-gap: 25px;
+    padding: 0px 7.7%;
+    margin-top: 6%;
+    margin-bottom: 80px;
+    text-align: center;
+}
+
+.display-photo {
+    width: 200px;
+}
+
+@media screen and (min-width:480px) {
+    #face {
+        flex-direction: row;
+        text-align: left;
+    }
+    #face-left {
+        width: 55%;
+    }
+    #face-left > .my-h1-2 {
+        font-weight: 700;
+        font-size: 44px;
+    }
+    #face-right {
+        width: 35%;
+    }
+    .display-photo {
+        width: 350px;
+    }
+}
+
+#face > div {
+    height: auto;
+    position: relative;
+}
+
+#face-left {
+    width: 100%;
+    color: white;
+}
+
+#face-left > h1 {
+    font-weight: 700;
+    font-size: 32px;
+}
+
+#face-left > p {
+    font-weight: 400;
+    font-size: 16px;
+}
+
+#resume-button {
+    background-color: rgb(189, 67, 118);
+    color: white;
+    font-weight: 500;
+    font-size: 18px;
+    padding: 14px 28px;
+    border-radius: 2px;
+    border: 0;
+    margin-top: 15px;
+}
+
+#resume-button:hover {
+    background-color: rgb(168, 60, 105);
+}
+
+#face-right {
+    width: 100%;
+    color: white;
+    text-align: center;
+}
+
+/* Face End */
+
+/* Journey Start */
+
+#progress-header {
+    display: flex;
+    font-size: 12px;
+    font-weight: 600;
+    color: white;
+    text-align: center;
+    justify-content: center;
+    background-color: rgb(38, 0, 59);
+    padding: 0px 7.7%;
+}
+
+.section-title {
+    width: 100%;
+    text-align: center;
+    margin-top: 15px;
+}
+
+#progress-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+    padding: 0px 20px;
+    padding-bottom: 20px;
+    column-gap: 0px;
+    justify-content: space-around;
+    background-color: rgb(38, 0, 59);
+    position: relative;
+    row-gap: 15px;
+}
+
+@media screen and (min-width: 1100px) {
+    #progress-header {
+        justify-content: flex-start;
+        font-size: 16px;
+    }
+    
+    #progress-section {
+        flex-direction: row;
+        padding-left: 7.7%;
+        padding-right: 7.7%;
+        padding-bottom: 40px;
+        justify-content: space-around;
+        column-gap: 55px;
+        row-gap: 0px;
+        align-items: stretch;
+    }
+
+    .section-title {
+        text-align: left;
+    }
+
+    #progress-section > .prog-div {
+        width: 30%;
+        margin-bottom: 10px;
+        font-size: 30px;
+    }
+
+    .prog-div > .prog-text {
+        font-size: 26px;
+    }
+
+    #blog > h1 {
+        font-size: 26px;
+        color: rgb(189, 67, 118);
+    }
+    
+    #blog > p {
+        font-size: 20px;
+    }
+}
+
+.prog-div {
+    background-color: rgb(63, 0, 100);
+    width: 82%;
+    padding: 25px 30px;
+    font-size: 20px;
+    justify-content: center;
+}
+
+.loading-bar {
+    height: 10px;
+    background-color: rgb(38, 0, 59);
+    border-radius: 20px;
+    position: inherit;
+    width: 100%;
+    margin-top: 15px;
+}
+
+.loaded {
+    height: 10px;
+    background-color: rgb(0, 190, 0);
+    border-radius: 20px;
+}
+
+#bar1 {
+    width: 10%;
+}
+
+#bar2 {
+    width: 30%;
+}
+
+.prog-text {
+    color: white;
+    padding-top: 25px;
+    padding-bottom: 0px;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.6;
+}
+
+.prog-text > #done {
+    color: rgb(189, 67, 118);
+}
+
+.prog-text > #plan {
+    color: rgb(38, 0, 59);
+}
+
+#blog {
+    color: white;
+}
+
+#blog > h1 {
+    font-size: 27px;
+    color: rgb(189, 67, 118);
+}
+
+#blog > p {
+    font-size: 16px;
+}
+
+/* Journey End */
+
+/* Featured Start */
+
+#featured-works {
+    padding: 10.5% 8%;
+    color: white;
+    margin-bottom: 10px;
+}
+
+.horizontal-card {
+    display: flex;
+    row-gap: 3%;
+    flex-direction: column;
+}
+
+span.pill {
+    background-color: rgb(189, 67, 118);
+    padding: 1.5px 15px;
+    color: white;
+    border-radius: 15px;
+    font-weight: 700;
+    font-size: 16px;
+}
+
+#featured-works > .section-title {
+    padding-bottom: 15px;
+    font-size: 12px;
+}
+
+.horizontal-card > img {
+    border-radius: 6px;
+}
+
+#featured-works > hr {
+    color: rgb(38, 0, 59);
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+@media screen and (min-width: 480px) {
+    .horizontal-card {
+        column-gap: 3%;
+        flex-direction: row;
+    }
+
+    #featured-works > h1 {
+        font-size: 12px;
+    }
+
+    #featured-works {
+        padding: 1.5% 8%;
+        margin-bottom: 100px;
+    }
+
+    #featured-works > .section-title {
+        padding-bottom: 30px;
+        font-size: 16px;
+    }
+}
+
+/* Featured End */
+
+/* Social Media Start */
+
+#social-media {
+    font-size: 35px;
+    color: white;
+    display: flex;
+    column-gap: 45px;
+    justify-content: center;
+    margin-bottom: 25px;
+}
+
+#social-media > a {
+    color: white;
+}
+
+/* Social Media End */
+
+#my-h1 {
+    font-size: 15px;
+    font-weight: 100;
+    text-align: center;
+    color: white;
+    margin-bottom: 60px;
+}
