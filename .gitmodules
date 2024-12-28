@@ -1,0 +1,3 @@
+[submodule "content/nexus"]
+	path = content/nexus
+	url = https://github.com/owayys/nexus
