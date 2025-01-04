@@ -9,7 +9,6 @@ import * as Plugin from "./quartz/plugins"
 const config: QuartzConfig = {
   configuration: {
     pageTitle: "oways",
-    pageTitleSuffix: "",
     enableSPA: true,
     enablePopovers: true,
     analytics: {
@@ -25,31 +24,31 @@ const config: QuartzConfig = {
       cdnCaching: true,
       typography: {
         header: "Mona Sans",
-        body: "Atkinson Hyperlegible",
+        body: "Mona Sans",
         code: "JetBrains Mono",
       },
       colors: {
         lightMode: {
-          light: "#faf8f8",
-          lightgray: "#e5e5e5",
-          gray: "#b8b8b8",
-          darkgray: "#4e4e4e",
-          dark: "#2b2b2b",
-          secondary: "#284b63",
-          tertiary: "#84a59d",
+          light: "#fbf1c7",
+          lightgray: "#ebdbb2",
+          gray: "#b57614",
+          darkgray: "#3c3836",
+          dark: "#427b58",
+          secondary: "#282828",
+          tertiary: "#b57614",
           highlight: "rgba(143, 159, 169, 0.15)",
-          textHighlight: "#fff23688",
+          textHighlight: "#282828",
         },
         darkMode: {
-          light: "#161618",
-          lightgray: "#393639",
-          gray: "#646464",
-          darkgray: "#d4d4d4",
-          dark: "#ebebec",
-          secondary: "#7b97aa",
-          tertiary: "#84a59d",
+          light: "#1d2021", // background
+          lightgray: "#3c3836", // outlines + search
+          gray: "#fabd2f", // date, x min read under header
+          darkgray: "#ebdbb2", // dec date
+          dark: "#8ec07c", // section
+          secondary: "#fbf1c7", // header, created with etc
+          tertiary: "#fabd2f", // link hover + tag desc
           highlight: "rgba(143, 159, 169, 0.15)",
-          textHighlight: "#b3aa0288",
+          textHighlight: "#fbf1c7",
         },
       },
     },
@@ -60,21 +59,20 @@ const config: QuartzConfig = {
       Plugin.CreatedModifiedDate({
         priority: ["frontmatter", "filesystem"],
       }),
-      Plugin.SyntaxHighlighting({
-        theme: {
-          light: "github-light",
-          dark: "github-dark",
-        },
-        keepBackground: false,
+      Plugin.Latex({ renderEngine: "katex" }),
+      Plugin.SyntaxHighlighting(),
+      Plugin.ObsidianFlavoredMarkdown({
+        enableInHtmlEmbed: false,
+        parseTags: false,
+        mermaid: false,
       }),
-      Plugin.ObsidianFlavoredMarkdown({ enableInHtmlEmbed: false }),
       Plugin.GitHubFlavoredMarkdown(),
       Plugin.TableOfContents(),
-      Plugin.CrawlLinks({ markdownLinkResolution: "shortest" }),
+      Plugin.CrawlLinks({ markdownLinkResolution: "absolute", lazyLoad: true }),
       Plugin.Description(),
       Plugin.Latex({ renderEngine: "katex" }),
     ],
-    filters: [Plugin.RemoveDrafts(), Plugin.ExplicitPublish()],
+    filters: [Plugin.RemoveDrafts()],
     emitters: [
       Plugin.AliasRedirects(),
       Plugin.ComponentResources(),
