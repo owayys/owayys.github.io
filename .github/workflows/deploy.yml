@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - v4
+  repository_dispatch:
+    types: [submodule_push]
 
 permissions:
   contents: read
@@ -22,6 +24,7 @@ jobs:
         with:
           fetch-depth: 0 # Fetch all history for git info
           submodules: true
+          token: ${{ secrets.NEXUS_PAT }}
       - uses: actions/setup-node@v4
         with:
           node-version: 22
