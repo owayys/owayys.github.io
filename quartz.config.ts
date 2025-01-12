@@ -23,7 +23,7 @@ const config: QuartzConfig = {
       fontOrigin: "googleFonts",
       cdnCaching: true,
       typography: {
-        header: "Mona Sans",
+        header: "JetBrains Mono",
         body: "Mona Sans",
         code: "JetBrains Mono",
       },
@@ -36,7 +36,7 @@ const config: QuartzConfig = {
           dark: "#427b58",
           secondary: "#282828",
           tertiary: "#b57614",
-          highlight: "rgba(143, 159, 169, 0.15)",
+          highlight: "rgba(189, 174, 147, 0.15)",
           textHighlight: "#282828",
         },
         darkMode: {
@@ -47,7 +47,7 @@ const config: QuartzConfig = {
           dark: "#8ec07c", // section
           secondary: "#fbf1c7", // header, created with etc
           tertiary: "#fabd2f", // link hover + tag desc
-          highlight: "rgba(143, 159, 169, 0.15)",
+          highlight: "rgba(146, 131, 116, 0.15)",
           textHighlight: "#fbf1c7",
         },
       },
