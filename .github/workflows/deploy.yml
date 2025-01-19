@@ -29,8 +29,10 @@ jobs:
       - name: Update submodules to latest commit
         run: |
           git submodule update --init --recursive
-          git submodule foreach 'git checkout $ref'
-          git submodule foreach 'git pull origin $branch'
+          git submodule foreach '
+            git checkout main || exit 0; 
+            git pull origin $(git rev-parse --abbrev-ref HEAD)
+          '
         env:
           GITHUB_TOKEN: ${{ secrets.NEXUS_PAT }}
       - uses: actions/setup-node@v4
