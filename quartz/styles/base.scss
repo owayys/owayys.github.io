@@ -576,6 +576,7 @@ video {
 }
 
 div:has(> .overflow) {
+  display: flex;
   max-height: 100%;
   overflow-y: hidden;
 }
@@ -592,7 +593,7 @@ ol.overflow {
   clear: both;
 
   & > li.overflow-end {
-    height: 0.5rem;
+    height: 1rem;
     margin: 0;
   }
 

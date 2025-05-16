@@ -50,7 +50,7 @@ const config: QuartzConfig = {
           highlight: "rgba(143, 159, 169, 0.15)",
           textHighlight: "#b3aa0288",
         },
-      }
+      },
       // colors: {
       //   lightMode: {
       //     light: "#fbf1c7",
