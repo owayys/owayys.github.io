@@ -27,31 +27,31 @@ const config: QuartzConfig = {
         body: "Mona Sans",
         code: "JetBrains Mono",
       },
-      // colors: {
-      //   lightMode: {
-      //     light: "#fbf1c7",
-      //     lightgray: "#ebdbb2",
-      //     gray: "#b57614",
-      //     darkgray: "#3c3836",
-      //     dark: "#427b58",
-      //     secondary: "#282828",
-      //     tertiary: "#b57614",
-      //     highlight: "rgba(189, 174, 147, 0.15)",
-      //     textHighlight: "#282828",
-      //   },
-      //   darkMode: {
-      //     light: "#1d2021", // background
-      //     lightgray: "#3c3836", // outlines + search
-      //     gray: "#fabd2f", // date, x min read under header
-      //     darkgray: "#ebdbb2", // dec date
-      //     dark: "#8ec07c", // section
-      //     secondary: "#fbf1c7", // header, created with etc
-      //     tertiary: "#fabd2f", // link hover + tag desc
-      //     highlight: "rgba(146, 131, 116, 0.15)",
-      //     textHighlight: "#fbf1c7",
-      //   },
-      // },
-    } as Theme,
+      colors: {
+        lightMode: {
+          light: "#fbf1c7",
+          lightgray: "#ebdbb2",
+          gray: "#b57614",
+          darkgray: "#3c3836",
+          dark: "#427b58",
+          secondary: "#282828",
+          tertiary: "#b57614",
+          highlight: "rgba(189, 174, 147, 0.15)",
+          textHighlight: "#282828",
+        },
+        darkMode: {
+          light: "#1d2021", // background
+          lightgray: "#3c3836", // outlines + search
+          gray: "#fabd2f", // date, x min read under header
+          darkgray: "#ebdbb2", // dec date
+          dark: "#8ec07c", // section
+          secondary: "#fbf1c7", // header, created with etc
+          tertiary: "#fabd2f", // link hover + tag desc
+          highlight: "rgba(146, 131, 116, 0.15)",
+          textHighlight: "#fbf1c7",
+        },
+      },
+    },
   },
   plugins: {
     transformers: [
