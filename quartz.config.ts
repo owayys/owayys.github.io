@@ -1,6 +1,5 @@
 import { QuartzConfig } from "./quartz/cfg"
 import * as Plugin from "./quartz/plugins"
-import { Theme } from "./quartz/util/theme"
 
 /**
  * Quartz 4 Configuration
@@ -10,13 +9,14 @@ import { Theme } from "./quartz/util/theme"
 const config: QuartzConfig = {
   configuration: {
     pageTitle: "oways",
+    pageTitleSuffix: "",
     enableSPA: true,
     enablePopovers: true,
     analytics: {
       provider: "plausible",
     },
     locale: "en-US",
-    baseUrl: "oways.is-a.dev",
+    baseUrl: "quartz.jzhao.xyz",
     ignorePatterns: ["private", "templates", ".obsidian"],
     defaultDateType: "modified",
     theme: {
@@ -51,30 +51,6 @@ const config: QuartzConfig = {
           textHighlight: "#b3aa0288",
         },
       },
-      // colors: {
-      //   lightMode: {
-      //     light: "#fbf1c7",
-      //     lightgray: "#ebdbb2",
-      //     gray: "#b57614",
-      //     darkgray: "#3c3836",
-      //     dark: "#427b58",
-      //     secondary: "#282828",
-      //     tertiary: "#b57614",
-      //     highlight: "rgba(189, 174, 147, 0.15)",
-      //     textHighlight: "#282828",
-      //   },
-      //   darkMode: {
-      //     light: "#1d2021", // background
-      //     lightgray: "#3c3836", // outlines + search
-      //     gray: "#fabd2f", // date, x min read under header
-      //     darkgray: "#ebdbb2", // dec date
-      //     dark: "#8ec07c", // section
-      //     secondary: "#fbf1c7", // header, created with etc
-      //     tertiary: "#fabd2f", // link hover + tag desc
-      //     highlight: "rgba(146, 131, 116, 0.15)",
-      //     textHighlight: "#fbf1c7",
-      //   },
-      // },
     },
   },
   plugins: {
@@ -83,16 +59,17 @@ const config: QuartzConfig = {
       Plugin.CreatedModifiedDate({
         priority: ["frontmatter", "git", "filesystem"],
       }),
-      Plugin.Latex({ renderEngine: "katex" }),
-      Plugin.SyntaxHighlighting(),
-      Plugin.ObsidianFlavoredMarkdown({
-        enableInHtmlEmbed: false,
-        parseTags: false,
-        mermaid: false,
+      Plugin.SyntaxHighlighting({
+        theme: {
+          light: "github-light",
+          dark: "github-dark",
+        },
+        keepBackground: false,
       }),
+      Plugin.ObsidianFlavoredMarkdown({ enableInHtmlEmbed: false }),
       Plugin.GitHubFlavoredMarkdown(),
       Plugin.TableOfContents(),
-      Plugin.CrawlLinks({ markdownLinkResolution: "absolute", lazyLoad: true }),
+      Plugin.CrawlLinks({ markdownLinkResolution: "shortest" }),
       Plugin.Description(),
       Plugin.Latex({ renderEngine: "katex" }),
     ],
