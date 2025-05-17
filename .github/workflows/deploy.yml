@@ -42,6 +42,7 @@ jobs:
         run: npm ci
       - name: Fetch Quartz Theme
         run: curl -s -S https://raw.githubusercontent.com/saberzero1/quartz-themes/master/action.sh | bash -s -- wombat
+      - name: Build Quartz
         run: npx quartz build -d nexus
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
