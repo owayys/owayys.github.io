@@ -32,6 +32,12 @@ export const defaultContentPageLayout: PageLayout = {
       ],
     }),
     Component.Explorer(),
+    Component.RecentNotes({
+      title: "Recently",
+      limit: 3,
+      filter: (f) => f.slug!.startsWith("thoughts/"),
+      linkToMore: "thoughts/" as SimpleSlug,
+    }),
   ],
   right: [
     Component.Graph(),
