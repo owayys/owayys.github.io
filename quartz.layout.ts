@@ -1,11 +1,21 @@
 import { PageLayout, SharedLayout } from "./quartz/cfg"
 import * as Component from "./quartz/components"
+import { SimpleSlug } from "./quartz/util/path"
 
 // components shared across all pages
 export const sharedPageComponents: SharedLayout = {
   head: Component.Head(),
   header: [],
-  afterBody: [],
+  afterBody: [
+    Component.MobileOnly(
+      Component.RecentNotes({
+        title: "Recent",
+        limit: 2,
+        filter: (f) => f.slug!.startsWith("thoughts/"),
+        linkToMore: "thoughts/" as SimpleSlug,
+      }),
+    ),
+  ],
   footer: Component.Footer({
     links: {
       GitHub: "https://github.com/owayys/owayys.github.io",
@@ -36,9 +46,20 @@ export const defaultContentPageLayout: PageLayout = {
       ],
     }),
     Component.Explorer(),
+    Component.DesktopOnly(
+      Component.RecentNotes({
+        title: "Recent",
+        limit: 2,
+        filter: (f) => f.slug!.startsWith("thoughts/"),
+        linkToMore: "thoughts/" as SimpleSlug,
+      }),
+    ),
   ],
   right: [
-    Component.Graph(),
+    Component.ConditionalRender({
+      component: Component.Graph(),
+      condition: (page) => page.fileData.slug !== "index",
+    }),
     Component.DesktopOnly(Component.TableOfContents()),
     Component.Backlinks(),
   ],

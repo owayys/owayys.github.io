@@ -6,6 +6,9 @@
 
 body[data-slug="index"] .page-header {
   opacity: 0;
+  @media all and ($mobile) {
+        display: none
+  }
 }
 
 hr {
