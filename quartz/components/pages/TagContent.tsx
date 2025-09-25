@@ -108,7 +108,7 @@ export default ((opts?: Partial<TagContentOptions>) => {
         </div>
       )
     } else {
-      const pages = allPagesWithTag(tag)
+      const pages = allPagesWithTag(tag).filter((data) => data.slug !== "index")
       const listProps = {
         ...props,
         allFiles: pages,
