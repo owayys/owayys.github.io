@@ -29,8 +29,8 @@ interface BreadcrumbOptions {
 }
 
 const defaultOptions: BreadcrumbOptions = {
-  spacerSymbol: "›",
-  rootName: "root",
+  spacerSymbol: "/",
+  rootName: "~",
   resolveFrontmatterTitle: true,
   showCurrentPage: true,
 }

@@ -45,11 +45,11 @@ export const defaultContentPageLayout: PageLayout = {
         },
       ],
     }),
-    Component.Explorer(),
+    // Component.Explorer(),
     Component.DesktopOnly(
       Component.RecentNotes({
-        title: "Recent",
-        limit: 2,
+        title: "Recently",
+        limit: 3,
         filter: (f) => f.slug!.startsWith("thoughts/"),
         linkToMore: "thoughts/" as SimpleSlug,
       }),
@@ -78,5 +78,5 @@ export const defaultListPageLayout: PageLayout = {
     }),
     Component.Explorer(),
   ],
-  right: [],
+  right: [Component.DesktopOnly(Component.TableOfContents())],
 }
