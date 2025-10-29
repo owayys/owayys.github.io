@@ -2,20 +2,18 @@ import { PageLayout, SharedLayout } from "./quartz/cfg"
 import * as Component from "./quartz/components"
 import { SimpleSlug } from "./quartz/util/path"
 
+const recentNotes = Component.RecentNotes({
+  title: "Recent",
+  limit: 3,
+  filter: (f) => f.slug!.startsWith("thoughts/"),
+  linkToMore: "thoughts/" as SimpleSlug,
+})
+
 // components shared across all pages
 export const sharedPageComponents: SharedLayout = {
   head: Component.Head(),
   header: [],
-  afterBody: [
-    Component.MobileOnly(
-      Component.RecentNotes({
-        title: "Recent",
-        limit: 2,
-        filter: (f) => f.slug!.startsWith("thoughts/"),
-        linkToMore: "thoughts/" as SimpleSlug,
-      }),
-    ),
-  ],
+  afterBody: [Component.MobileOnly(recentNotes)],
   footer: Component.Footer({
     links: {
       GitHub: "https://github.com/owayys/owayys.github.io",
@@ -46,14 +44,8 @@ export const defaultContentPageLayout: PageLayout = {
       ],
     }),
     // Component.Explorer(),
-    Component.DesktopOnly(
-      Component.RecentNotes({
-        title: "Recently",
-        limit: 3,
-        filter: (f) => f.slug!.startsWith("thoughts/"),
-        linkToMore: "thoughts/" as SimpleSlug,
-      }),
-    ),
+    Component.DesktopOnly(recentNotes),
+    Component.Constants(),
   ],
   right: [
     Component.Graph(),
