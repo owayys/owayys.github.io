@@ -13,8 +13,8 @@ const config: QuartzConfig = {
     enableSPA: true,
     enablePopovers: true,
     analytics: {
-      provider: "goatcounter",
-      websiteId: "owayys",
+      provider: "umami",
+      websiteId: "4036ac41-2e5b-4cbc-bdab-5dd704b8b328",
     },
     locale: "en-US",
     baseUrl: "quartz.jzhao.xyz",
