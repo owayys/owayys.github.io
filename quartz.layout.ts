@@ -44,7 +44,7 @@ export const defaultContentPageLayout: PageLayout = {
       ],
     }),
     Component.DesktopOnly(recentNotes),
-    Component.Constants(),
+    // Component.Constants(),
   ],
   right: [
     Component.Graph(),
@@ -68,7 +68,7 @@ export const defaultListPageLayout: PageLayout = {
       ],
     }),
     Component.DesktopOnly(recentNotes),
-    Component.Constants(),
+    // Component.Constants(),
   ],
   right: [Component.DesktopOnly(Component.TableOfContents())],
 }
