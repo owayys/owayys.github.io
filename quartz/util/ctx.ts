@@ -12,6 +12,7 @@ export interface Argv {
   port: number
   wsPort: number
   remoteDevHost?: string
+  theme: string
   concurrency?: number
 }
 

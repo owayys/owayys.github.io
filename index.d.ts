@@ -3,6 +3,10 @@ declare module "*.scss" {
   export = content
 }
 
+declare module "quartz:theme" {
+  export const theme: import("./quartz/util/theme").Theme
+}
+
 // dom custom event
 interface CustomEventMap {
   prenav: CustomEvent<{}>

@@ -42,6 +42,81 @@ function resolveContentPath(contentPath) {
   return path.join(cwd, contentPath)
 }
 
+const themeImportMarker = '@use "./themes";'
+const themeModuleId = "quartz:theme"
+const reservedThemeDirectories = new Set(["extras"])
+
+function themeFilePath(theme, filename) {
+  return path.join(cwd, "quartz/styles/themes", theme, filename)
+}
+
+function availableThemeIds() {
+  const themeRoot = path.join(cwd, "quartz/styles/themes")
+  return fs
+    .readdirSync(themeRoot, { withFileTypes: true })
+    .filter((entry) => entry.isDirectory())
+    .map((entry) => entry.name)
+    .filter((name) => !reservedThemeDirectories.has(name))
+    .filter((name) => fs.existsSync(path.join(themeRoot, name, "_index.scss")))
+    .filter((name) => fs.existsSync(path.join(themeRoot, name, "index.ts")))
+    .sort()
+}
+
+function validateBuildTheme(theme) {
+  if (!/^[A-Za-z0-9_-]+$/.test(theme)) {
+    console.error(
+      styleText(
+        "red",
+        `Invalid theme "${theme}". Theme ids may only contain letters, numbers, underscores, and hyphens.`,
+      ),
+    )
+    process.exit(1)
+  }
+
+  if (reservedThemeDirectories.has(theme)) {
+    const availableThemes = availableThemeIds()
+    console.error(
+      styleText("red", `Invalid theme "${theme}". Available themes: ${availableThemes.join(", ")}`),
+    )
+    process.exit(1)
+  }
+
+  const themeIndex = themeFilePath(theme, "_index.scss")
+  const themeModule = themeFilePath(theme, "index.ts")
+  if (!fs.existsSync(themeIndex) || !fs.existsSync(themeModule)) {
+    const availableThemes = availableThemeIds()
+    const availableMessage =
+      availableThemes.length > 0 ? ` Available themes: ${availableThemes.join(", ")}` : ""
+    console.error(
+      styleText(
+        "red",
+        `Invalid theme "${theme}". Expected quartz/styles/themes/${theme}/_index.scss and quartz/styles/themes/${theme}/index.ts.${availableMessage}`,
+      ),
+    )
+    process.exit(1)
+  }
+}
+
+function applyBuildTheme(source, sourcePath, theme) {
+  const relativeSourcePath = path.relative(cwd, path.resolve(sourcePath)).split(path.sep).join("/")
+  if (relativeSourcePath !== "quartz/styles/custom.scss") {
+    return source
+  }
+
+  return source.replace(themeImportMarker, `@use "./themes/${theme}";`)
+}
+
+function themeModulePlugin(theme) {
+  return {
+    name: "theme-module-resolver",
+    setup(build) {
+      build.onResolve({ filter: /^quartz:theme$/ }, () => ({
+        path: themeFilePath(theme, "index.ts"),
+      }))
+    },
+  }
+}
+
 /**
  * Handles `npx quartz create`
  * @param {*} argv arguments for `create`
@@ -236,6 +311,7 @@ export async function handleBuild(argv) {
   if (argv.serve) {
     argv.watch = true
   }
+  validateBuildTheme(argv.theme)
 
   console.log(`\n${styleText(["bgGreen", "black"], ` Quartz v${version} `)} \n`)
   const ctx = await esbuild.context({
@@ -254,9 +330,11 @@ export async function handleBuild(argv) {
     sourcemap: true,
     sourcesContent: false,
     plugins: [
+      themeModulePlugin(argv.theme),
       sassPlugin({
         type: "css-text",
         cssImports: true,
+        precompile: (source, sourcePath) => applyBuildTheme(source, sourcePath, argv.theme),
       }),
       sassPlugin({
         filter: /\.inline\.scss$/,

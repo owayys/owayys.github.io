@@ -101,6 +101,11 @@ export const BuildArgv = {
     default: false,
     describe: "show detailed bundle information",
   },
+  theme: {
+    string: true,
+    default: "wombat",
+    describe: "theme id from quartz/styles/themes/<theme-id>",
+  },
   concurrency: {
     number: true,
     describe: "how many threads to use to parse notes",
