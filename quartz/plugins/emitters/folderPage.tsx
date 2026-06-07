@@ -22,6 +22,11 @@ import { BuildCtx } from "../../util/ctx"
 import { StaticResources } from "../../util/resources"
 interface FolderPageOptions extends FullPageLayout {
   sort?: (f1: QuartzPluginData, f2: QuartzPluginData) => number
+  exclude?: SimpleSlug[]
+}
+
+function isIncludedFolder(folderName: SimpleSlug, exclude: SimpleSlug[] = []): boolean {
+  return folderName !== "." && folderName !== "tags" && !exclude.includes(folderName)
 }
 
 async function* processFolderInfo(
@@ -101,6 +106,7 @@ function _getFolders(slug: FullSlug): SimpleSlug[] {
 }
 
 export const FolderPage: QuartzEmitterPlugin<Partial<FolderPageOptions>> = (userOpts) => {
+  const exclude = userOpts?.exclude ?? []
   const opts: FullPageLayout = {
     ...sharedPageComponents,
     ...defaultListPageLayout,
@@ -135,9 +141,7 @@ export const FolderPage: QuartzEmitterPlugin<Partial<FolderPageOptions>> = (user
       const folders: Set<SimpleSlug> = new Set(
         allFiles.flatMap((data) => {
           return data.slug
-            ? _getFolders(data.slug).filter(
-                (folderName) => folderName !== "." && folderName !== "tags",
-              )
+            ? _getFolders(data.slug).filter((folderName) => isIncludedFolder(folderName, exclude))
             : []
         }),
       )
@@ -154,8 +158,8 @@ export const FolderPage: QuartzEmitterPlugin<Partial<FolderPageOptions>> = (user
       for (const changeEvent of changeEvents) {
         if (!changeEvent.file) continue
         const slug = changeEvent.file.data.slug!
-        const folders = _getFolders(slug).filter(
-          (folderName) => folderName !== "." && folderName !== "tags",
+        const folders = _getFolders(slug).filter((folderName) =>
+          isIncludedFolder(folderName, exclude),
         )
         folders.forEach((folder) => affectedFolders.add(folder))
       }

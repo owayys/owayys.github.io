@@ -1,6 +1,7 @@
 import { PageLayout, SharedLayout } from "./quartz/cfg"
 import * as Component from "./quartz/components"
 import { SimpleSlug } from "./quartz/util/path"
+import { QuartzPluginData } from "./quartz/plugins/vfile"
 
 const recentNotes = Component.RecentNotes({
   title: "Recent",
@@ -8,6 +9,34 @@ const recentNotes = Component.RecentNotes({
   filter: (f) => f.slug!.startsWith("thoughts/") || f.slug!.startsWith("reading/"),
   linkToMore: "thoughts/" as SimpleSlug,
 })
+
+export const streamFilter = (f: QuartzPluginData) =>
+  f.slug!.startsWith("stream/") && f.slug !== "stream/index"
+
+const stream = Component.StreamContent({
+  filter: streamFilter,
+})
+
+export const contentPageBody = Component.Flex({
+  direction: "column",
+  gap: "0",
+  components: [
+    {
+      Component: Component.ConditionalRender({
+        component: stream,
+        condition: (page) => page.fileData.slug === "index",
+      }),
+    },
+    {
+      Component: Component.ConditionalRender({
+        component: Component.Content(),
+        condition: (page) => page.fileData.slug !== "index",
+      }),
+    },
+  ],
+})
+
+const isNotHome = (page: { fileData: { slug?: string } }) => page.fileData.slug !== "index"
 
 // components shared across all pages
 export const sharedPageComponents: SharedLayout = {
@@ -26,11 +55,20 @@ export const defaultContentPageLayout: PageLayout = {
   beforeBody: [
     Component.ConditionalRender({
       component: Component.Breadcrumbs(),
-      condition: (page) => page.fileData.slug !== "index",
+      condition: isNotHome,
     }),
-    Component.ArticleTitle(),
-    Component.ContentMeta(),
-    Component.TagList(),
+    Component.ConditionalRender({
+      component: Component.ArticleTitle(),
+      condition: isNotHome,
+    }),
+    Component.ConditionalRender({
+      component: Component.ContentMeta(),
+      condition: isNotHome,
+    }),
+    Component.ConditionalRender({
+      component: Component.TagList(),
+      condition: isNotHome,
+    }),
   ],
   left: [
     Component.PageTitle(),

@@ -1,0 +1,90 @@
+@use "../../styles/variables.scss" as *;
+
+.stream {
+  .stream-header {
+    margin-bottom: 2em;
+
+    h1 {
+      margin: 0;
+    }
+
+    .stream-count {
+      margin: 0.5em 0 0;
+      opacity: 0.6;
+    }
+  }
+
+  .stream-list {
+    list-style: none;
+    padding: 0;
+    margin: 2em 0 0;
+  }
+
+  .stream-item {
+    margin-bottom: 2.5em;
+    padding-bottom: 2.5em;
+    border-bottom: 1px solid var(--lightgray);
+
+    &:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+  }
+
+  .stream-hidden {
+    display: none;
+  }
+
+  .stream-title {
+    margin: 0 0 0.5em;
+
+    a {
+      background-color: transparent;
+    }
+  }
+
+  .stream-body {
+    margin: 0.75em 0;
+
+    p:first-child {
+      margin-top: 0;
+    }
+
+    p:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .stream-meta {
+    margin: 0.75em 0 0;
+    opacity: 0.6;
+    font-size: 0.9em;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.25em;
+
+    .stream-meta-sep {
+      opacity: 0.8;
+    }
+
+    .tags {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: inline-flex;
+      flex-wrap: wrap;
+      gap: 0.25em;
+
+      &::before {
+        content: " · ";
+      }
+    }
+  }
+
+  .stream-sentinel {
+    height: 1px;
+    visibility: hidden;
+  }
+}
