@@ -130,15 +130,9 @@ export default ((userOpts?: Partial<StreamContentOptions>) => {
                       <Date date={getDate(cfg, data)!} locale={cfg.locale} />
                     </>
                   )}
-                  {showNumber && (
-                    <>
-                      {data.dates && <span class="stream-meta-sep"> · </span>}
-                      <span class="stream-number">№ {total - i}</span>
-                    </>
-                  )}
                   {hostname && (
                     <>
-                      {(data.dates || showNumber) && <span class="stream-meta-sep"> · </span>}
+                      {(data.dates || showNumber) && <span class="stream-meta-sep"> | </span>}
                       <span class="stream-source">{hostname}</span>
                     </>
                   )}

@@ -8,7 +8,6 @@
   &.stream-has-intro .stream-section-header {
     margin-top: 2.5em;
     padding-top: 2em;
-    border-top: 1px solid var(--lightgray);
   }
 
   .stream-section-title {
@@ -24,13 +23,9 @@
 
   .stream-item {
     margin-bottom: 2.5em;
-    padding-bottom: 2.5em;
-    border-bottom: 1px solid var(--lightgray);
 
     &:last-child {
-      border-bottom: none;
       margin-bottom: 0;
-      padding-bottom: 0;
     }
   }
 
