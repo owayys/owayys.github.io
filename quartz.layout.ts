@@ -15,6 +15,7 @@ export const streamFilter = (f: QuartzPluginData) =>
 
 const stream = Component.StreamContent({
   filter: streamFilter,
+  title: "Meandering"
 })
 
 export const contentPageBody = Component.Flex({

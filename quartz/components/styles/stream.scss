@@ -1,23 +1,25 @@
 @use "../../styles/variables.scss" as *;
 
 .stream {
-  .stream-header {
-    margin-bottom: 2em;
+  .stream-section-header {
+    margin: 1.5em 0 0;
+  }
 
-    h1 {
-      margin: 0;
-    }
+  &.stream-has-intro .stream-section-header {
+    margin-top: 2.5em;
+    padding-top: 2em;
+    border-top: 1px solid var(--lightgray);
+  }
 
-    .stream-count {
-      margin: 0.5em 0 0;
-      opacity: 0.6;
-    }
+  .stream-section-title {
+    margin: 0;
+    font-size: 1.25rem;
   }
 
   .stream-list {
     list-style: none;
     padding: 0;
-    margin: 2em 0 0;
+    margin: 1.5em 0 0;
   }
 
   .stream-item {

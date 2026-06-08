@@ -23,12 +23,14 @@ interface StreamContentOptions {
   batchSize: number
   sourceField: string
   showNumber: boolean
+  title?: string | false
 }
 
 const defaultOptions: Omit<StreamContentOptions, "entries" | "filter" | "sort"> = {
   batchSize: 15,
   sourceField: "source",
   showNumber: true,
+  title: "Stream",
 }
 
 const emptyRoot: Root = { type: "root", children: [] }
@@ -76,7 +78,7 @@ export default ((userOpts?: Partial<StreamContentOptions>) => {
 
   const StreamContent: QuartzComponent = (props: QuartzComponentProps) => {
     const { tree, fileData, cfg } = props
-    const { batchSize, sourceField, showNumber } = options
+    const { batchSize, sourceField, showNumber, title } = options
     const entries = resolveEntries(props, options)
     const total = entries.length
 
@@ -90,13 +92,11 @@ export default ((userOpts?: Partial<StreamContentOptions>) => {
     const classes = cssClasses.join(" ")
 
     return (
-      <div class="popover-hint stream">
-        {intro ? (
-          <article class={classes}>{intro}</article>
-        ) : (
-          <header class="stream-header">
-            <h1>{fileData.frontmatter?.title ?? "Stream"}</h1>
-            <p class="stream-count">{total} items</p>
+      <div class={`popover-hint stream${intro ? " stream-has-intro" : ""}`}>
+        {intro && <article class={classes}>{intro}</article>}
+        {title && (
+          <header class="stream-section-header">
+            <h2 class="stream-section-title">{title}</h2>
           </header>
         )}
         <ul class="stream-list" data-batch-size={batchSize}>
