@@ -13,21 +13,21 @@ const recentNotes = Component.RecentNotes({
 export const streamFilter = (f: QuartzPluginData) =>
   f.slug!.startsWith("stream/") && f.slug !== "stream/index"
 
-const stream = Component.StreamContent({
-  filter: streamFilter,
-  title: "Meandering"
-})
+// const stream = Component.StreamContent({
+//   filter: streamFilter,
+//   title: "Meandering"
+// })
 
 export const contentPageBody = Component.Flex({
   direction: "column",
   gap: "0",
   components: [
-    {
-      Component: Component.ConditionalRender({
-        component: stream,
-        condition: (page) => page.fileData.slug === "index",
-      }),
-    },
+    // {
+    //   Component: Component.ConditionalRender({
+    //     component: stream,
+    //     condition: (page) => page.fileData.slug === "index",
+    //   }),
+    // },
     {
       Component: Component.ConditionalRender({
         component: Component.Content(),
