@@ -46,7 +46,7 @@ export const sharedPageComponents: SharedLayout = {
   afterBody: [Component.MobileOnly(recentNotes)],
   footer: Component.Footer({
     links: {
-      github: "https://github.com/owayys/owayys.github.io",
+      github: "https://github.com/owayys",
       email: "mailto:owais.ahsan@hotmail.com"
     },
   }),
