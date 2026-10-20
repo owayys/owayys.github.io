@@ -1,37 +1,12 @@
 import { PageLayout, SharedLayout } from "./quartz/cfg"
 import * as Component from "./quartz/components"
 import { SimpleSlug } from "./quartz/util/path"
-import { QuartzPluginData } from "./quartz/plugins/vfile"
 
 const recentNotes = Component.RecentNotes({
   title: "Recent",
   limit: 3,
   filter: (f) => f.slug!.startsWith("thoughts/") || f.slug!.startsWith("reading/"),
   linkToMore: "thoughts/" as SimpleSlug,
-})
-
-export const streamFilter = (f: QuartzPluginData) =>
-  f.slug!.startsWith("stream/") && f.slug !== "stream/index"
-
-// const stream = Component.StreamContent({
-//   filter: streamFilter,
-//   title: "Meandering"
-// })
-
-export const contentPageBody = Component.Flex({
-  direction: "column",
-  gap: "0",
-  components: [
-    // {
-    //   Component: Component.ConditionalRender({
-    //     component: stream,
-    //     condition: (page) => page.fileData.slug === "index",
-    //   }),
-    // },
-    {
-      Component: Component.Content(),
-    },
-  ],
 })
 
 const isNotHome = (page: { fileData: { slug?: string } }) => page.fileData.slug !== "index"

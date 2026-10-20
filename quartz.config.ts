@@ -1,8 +1,6 @@
 import { QuartzConfig } from "./quartz/cfg"
 import * as Plugin from "./quartz/plugins"
 import { theme } from "quartz:theme"
-import { FullSlug, SimpleSlug } from "./quartz/util/path"
-import { streamFilter, contentPageBody } from "./quartz.layout"
 
 /**
  * Quartz 4 Configuration
@@ -49,14 +47,8 @@ const config: QuartzConfig = {
     emitters: [
       Plugin.AliasRedirects(),
       Plugin.ComponentResources(),
-      Plugin.ContentPage({
-        pageBody: contentPageBody,
-      }),
-      Plugin.FolderPage({ exclude: ["stream"] as SimpleSlug[] }),
-      Plugin.StreamPage({
-        slug: "stream/index" as FullSlug,
-        filter: streamFilter,
-      }),
+      Plugin.ContentPage(),
+      Plugin.FolderPage(),
       Plugin.TagPage(),
       Plugin.ContentIndex({
         enableSiteMap: true,
