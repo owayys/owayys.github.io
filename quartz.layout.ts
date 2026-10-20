@@ -29,10 +29,7 @@ export const contentPageBody = Component.Flex({
     //   }),
     // },
     {
-      Component: Component.ConditionalRender({
-        component: Component.Content(),
-        condition: (page) => page.fileData.slug !== "index",
-      }),
+      Component: Component.Content(),
     },
   ],
 })
