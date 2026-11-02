@@ -14,6 +14,7 @@ import {
 } from "../data"
 import type { Trackable, TrackerOptions } from "../data"
 import style from "./styles/tracker.scss"
+import type { JSX } from "preact"
 
 const CELL = 10
 const GAP = 3
@@ -78,12 +79,61 @@ function Grid({
   )
 }
 
+interface Streak {
+  value: number
+  unit: string
+  label: string
+}
+
+function Streaks({ streaks, cols }: { streaks: Streak[]; cols: number }) {
+  const cells: JSX.Element[] = []
+  let slot = 0
+  const cell = (ch: string, label: string, cls?: string) => {
+    const x = slot++ * PITCH
+    cells.push(
+      <g class={cls}>
+        <title>{label}</title>
+        <rect x={x} y={0} width={CELL} height={CELL} rx={2} />
+        <text x={x + CELL / 2} y={CELL / 2}>
+          {ch}
+        </text>
+      </g>,
+    )
+  }
+  for (const [i, s] of streaks.entries()) {
+    if (i > 0) {
+      const x = slot++ * PITCH
+      cells.push(
+        <text x={x + CELL / 2} y={CELL / 2}>
+          /
+        </text>,
+      )
+    }
+    for (const ch of String(s.value)) cell(ch, s.label)
+    cell(s.unit, s.label, "unit")
+  }
+  const width = slot * PITCH - GAP
+  return (
+    <svg
+      class="tracker-streaks"
+      viewBox={`0 0 ${width} ${CELL}`}
+      style={`width: ${(100 * width) / (cols * PITCH - GAP)}%`}
+      role="img"
+      aria-label={streaks.map((s) => s.label).join(", ")}
+    >
+      {cells}
+    </svg>
+  )
+}
+
 export default ((userOpts?: Partial<TrackerOptions>) => {
   const opts = { ...defaultOptions, ...userOpts }
 
   const Tracker: QuartzComponent = ({ ctx, displayClass }: QuartzComponentProps) => {
     const end = today(opts.timeZone)
     const start = addDays(end, -weekday(end) - (opts.weeks - 1) * 7)
+    const cols = Math.min(opts.columns, opts.weeks)
+    const gridWidth = cols * PITCH - GAP
 
     const trackables = [...trackerStore(ctx).values()]
       .filter((t) => [...t.days].some((d) => d >= start && d <= end))
@@ -100,13 +150,22 @@ export default ((userOpts?: Partial<TrackerOptions>) => {
             const total = [...t.days].filter((d) => d >= start && d <= end).length
             return (
               <li style={t.color ? `--tracker-color: ${t.color}` : undefined}>
-                <div class="tracker-head">
-                  <span class="tracker-name">{t.title}</span>
+                <div
+                  class="tracker-head"
+                  style={`--grid-gap: ${(100 * GAP) / gridWidth}%; --grid-cell: ${(100 * CELL) / gridWidth}%`}
+                >
+                  <Streaks
+                    cols={cols}
+                    streaks={[
+                      { value: streak, unit: "d", label: `${streak} day streak` },
+                      { value: weekStreak, unit: "w", label: `${weekStreak} week streak` },
+                    ]}
+                  />
                   <span
-                    class="tracker-stats"
+                    class="tracker-name"
                     title={`${total} days in the last ${opts.weeks} weeks`}
                   >
-                    {`${streak}d / ${weekStreak}w`}
+                    {t.title}
                   </span>
                 </div>
                 <Grid t={t} start={start} end={end} weeks={opts.weeks} columns={opts.columns} />

@@ -13,7 +13,7 @@ export interface TrackerOptions {
 
 export const defaultOptions: TrackerOptions = {
   folder: "trackers",
-  title: "Tracker",
+  title: "Trackers",
   weeks: 52,
   columns: 18,
 }
