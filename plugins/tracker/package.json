@@ -1,0 +1,86 @@
+{
+  "name": "tracker",
+  "version": "0.1.0",
+  "description": "GitHub-style activity grids for habit-tracker notes",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./components": {
+      "types": "./dist/components/index.d.ts",
+      "import": "./dist/components/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "typecheck": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "preact": "^10.0.0"
+  },
+  "devDependencies": {
+    "@quartz-community/types": "^1.0.0",
+    "@types/node": "^24.10.0",
+    "preact": "^10.28.2",
+    "sass": "^1.97.3",
+    "tsup": "^8.5.0",
+    "typescript": "^5.9.3"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "quartz": {
+    "name": "tracker",
+    "displayName": "Tracker",
+    "description": "Renders habit-tracker notes as activity grids and keeps the notes themselves unpublished",
+    "category": [
+      "filter",
+      "component"
+    ],
+    "version": "0.1.0",
+    "quartzVersion": ">=5.0.0",
+    "defaultEnabled": true,
+    "defaultOptions": {
+      "folder": "trackers",
+      "title": "Tracker",
+      "weeks": 52,
+      "columns": 18
+    },
+    "optionSchema": {
+      "folder": {
+        "type": "string",
+        "description": "Folder (relative to the content root) holding one note per trackable"
+      },
+      "title": {
+        "type": "string",
+        "description": "Heading shown above the grids"
+      },
+      "weeks": {
+        "type": "number",
+        "description": "Number of weeks shown in each grid"
+      },
+      "columns": {
+        "type": "number",
+        "description": "Week cells per row; the grid wraps onto further rows"
+      },
+      "timeZone": {
+        "type": "string",
+        "description": "IANA time zone used to decide what day it is at build time"
+      }
+    },
+    "components": {
+      "Tracker": {
+        "displayName": "Tracker",
+        "defaultPosition": "left",
+        "defaultPriority": 50
+      }
+    }
+  }
+}

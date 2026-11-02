@@ -1,0 +1,56 @@
+.tracker {
+  > h3 {
+    margin: 0.5rem 0 0 0;
+    font-size: 1rem;
+  }
+
+  > ul {
+    list-style: none;
+    margin: 1rem 0;
+    padding-left: 0;
+  }
+
+  li {
+    margin: 0 0 1rem 0;
+  }
+
+  .tracker-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0.5rem;
+    margin-bottom: 0.3rem;
+    font-size: 0.85rem;
+  }
+
+  .tracker-stats {
+    opacity: 0.6;
+    white-space: nowrap;
+  }
+
+  .tracker-grid {
+    display: block;
+    width: 100%;
+    height: auto;
+
+    rect {
+      fill: var(--tracker-color, var(--secondary));
+    }
+
+    rect.l0 {
+      fill: var(--lightgray);
+    }
+
+    rect.l1 {
+      fill-opacity: 0.3;
+    }
+
+    rect.l2 {
+      fill-opacity: 0.55;
+    }
+
+    rect.l3 {
+      fill-opacity: 0.8;
+    }
+  }
+}

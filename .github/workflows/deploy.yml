@@ -39,12 +39,30 @@ jobs:
         with:
           node-version: 22
           cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            plugins/*/package-lock.json
       - name: Install Dependencies
         run: npm ci
+      # local plugins are linked, not built, by Quartz
+      - name: Build local plugins
+        run: |
+          for dir in plugins/*/; do
+            echo "::group::$dir"
+            (cd "$dir" && npm ci && npm run build) || exit 1
+            echo "::endgroup::"
+          done
       - name: Install Quartz plugins
         run: npx quartz plugin install --from-config
       - name: Build Quartz
         run: npx quartz build -d nexus
+      # a plugin that fails to load only logs an error, so check the tracker filter ran
+      - name: Check tracker notes are unpublished
+        run: |
+          if [ -e public/trackers ]; then
+            echo "::error::trackers/ was published; the tracker plugin likely failed to load"
+            exit 1
+          fi
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
