@@ -1,3 +1,35 @@
 @use "./variables.scss" as *;
+@use "./themes/wombat";
 
 // put your custom CSS here!
+
+body[data-slug="index"] .page-header {
+  opacity: 0;
+  @media all and ($mobile) {
+    display: none;
+  }
+}
+
+hr {
+  overflow: visible;
+  padding: 0;
+  height: 0;
+  margin: 2em auto;
+  border: none !important;
+  text-align: center;
+  width: 100%;
+
+  &:after {
+    content: "* * *";
+    display: inline-block;
+    margin: -1em 0 0.5em;
+    font-size: 1.5em;
+    padding: 0.5em 1em;
+    color: var(--gray);
+  }
+}
+
+// v4's recent notes styles kept titles unhighlighted
+.recent-notes .section > .desc > h3 > a {
+  background-color: transparent;
+}
